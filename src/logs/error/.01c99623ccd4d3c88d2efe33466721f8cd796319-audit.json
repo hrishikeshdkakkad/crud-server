@@ -1,0 +1,14 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "/Users/hrishikeshkakkad/Documents/Personal Backend Template/backend-template/src/logs/error/.01c99623ccd4d3c88d2efe33466721f8cd796319-audit.json",
+    "files": [
+        {
+            "date": 1608466845763,
+            "name": "/Users/hrishikeshkakkad/Documents/Personal Backend Template/backend-template/src/logs/error/2020-12-20.error.log",
+            "hash": "5b8212a2c9efca2e2d039e5dc0b2aaab"
+        }
+    ]
+}

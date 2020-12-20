@@ -7,7 +7,6 @@ import morgan from 'morgan';
 import compression from 'compression';
 import { set } from 'mongoose';
 import { dbConnection } from './database';
-import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
 import { stream } from './utils/logger';
 import { config } from './config/app.config';
