@@ -6,6 +6,8 @@ import hpp from 'hpp';
 import morgan from 'morgan';
 import compression from 'compression';
 import { set } from 'mongoose';
+
+import IndexRoute from './routes/index.route';
 import { dbConnection } from './database';
 import errorMiddleware from './middlewares/error.middleware';
 import { stream } from './utils/logger';
@@ -36,6 +38,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 //Routes go here
+app.use('/api', IndexRoute);
 
 app.use(errorMiddleware);
 
