@@ -23,7 +23,7 @@ class EmployeeService implements Employee {
     return updateEmployeeProfile;
   }
 
-  async deleteEmployeeDocument(id: IEmployee): Promise<IEmployee> {
+  async deleteEmployeeDocument(id: number): Promise<any> {
     if (isEmpty(id)) throw new HttpException(400, 'Employee ID to delete is missing');
 
     const deleteEmployeeProfile = await this.employee.deleteOne({ employeeID: id });
@@ -42,8 +42,8 @@ class EmployeeService implements Employee {
     return employeeList;
   }
 
-  async updateEmployeeField(employeeID: number, field: IEmployee, value: string): Promise<ITodo> {
-    const updateValue = {};
+  async updateEmployeeField(employeeID: number, field: string, value: string): Promise<IEmployee> {
+    const updateValue: any = {};
     updateValue[field] = value;
     const updatedField = await this.employee.findOneAndUpdate({ employeeID: employeeID }, updateValue);
     return updatedField;

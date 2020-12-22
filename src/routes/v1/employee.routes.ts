@@ -8,9 +8,11 @@ import validationMiddleware from '../../middlewares/validation.middleware';
 
 const router = Router();
 
-export default router.get('/employee-management/list', EmployeeController.getAllEmployees);
-export default router.get('/employee-management/employee/:id', EmployeeController.getEmployee);
-export default router.post('/employee-management/employee', validationMiddleware(CreateEmployeeDto, 'body'), EmployeeController.addEmployee);
-export default router.patch('/employee-management/employee/photo', upload.single('upload'), EmployeeController.addEmployeePhoto);
-export default router.patch('/employee-management/employee/:id', mongoFieldValidation(), EmployeeController.updateEmployeeInformation);
-export default router.delete('/employee-management/employee/:id', EmployeeController.deleteEmployee);
+router.get('/employee-management/list', EmployeeController.getAllEmployees);
+router.get('/employee-management/employee/:id', EmployeeController.getEmployee);
+router.post('/employee-management/employee', validationMiddleware(CreateEmployeeDto, 'body'), EmployeeController.addEmployee);
+router.patch('/employee-management/employee/photo', upload.single('upload'), EmployeeController.addEmployeePhoto);
+router.patch('/employee-management/employee/:id', mongoFieldValidation(), EmployeeController.updateEmployeeInformation);
+router.delete('/employee-management/employee/:id', EmployeeController.deleteEmployee);
+
+export default router;

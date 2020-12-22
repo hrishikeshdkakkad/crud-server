@@ -1,11 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { CreateEmployeeDto } from '../dtos/employee.dto';
-import { IEmployee } from '../interfaces/employee.interface';
-import { employeeService } from '../services/employee.service';
 
-class EmployeeController {
+import { IEmployee, IWithBufferProperty } from '../interfaces/employee.interface';
+import { employeeService } from '../services/employee.service';
+class EmployeeControllerClass {
   public addEmployee = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const employeeData: CreateEmployeeDto = req.body;
+    const employeeData: IEmployee = req.body;
     try {
       const createEmployee: IEmployee = await employeeService.addEmployee(employeeData);
       res.status(201).json({ data: createEmployee, message: 'created' });
@@ -14,9 +13,9 @@ class EmployeeController {
     }
   };
 
-  public addEmployeePhoto = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public addEmployeePhoto = async (req: IWithBufferProperty, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const employeePhotoBuffer = req.file.buffer;
+      const employeePhotoBuffer = req.buffer.file;
       const photoUpdateResult = await employeeService.employeePhoto(employeePhotoBuffer, req.body.employeeID);
       if (photoUpdateResult) {
         res.status(200).send();
@@ -28,10 +27,10 @@ class EmployeeController {
 
   public getAllEmployees = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { limit } = req.query;
-      const employeeList = await employeeService.getAllEmployees(limit);
+      const { limit, skip } = req.query;
+      const employeeList = await employeeService.getAllEmployees(limit as string, skip as string);
       res.status(200).send(employeeList);
-    } catch (error: Error) {
+    } catch (error: unknown) {
       next(error);
     }
   };
@@ -39,13 +38,13 @@ class EmployeeController {
   public getEmployee = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const { id } = req.params;
-      const employee = await employeeService.getOneEmployee(id);
+      const employee = await employeeService.getOneEmployee(parseInt(id));
       if (employee) {
         res.status(200).send(employee);
       } else {
         res.status(404).send();
       }
-    } catch (error: Error) {
+    } catch (error: unknown) {
       next(error);
     }
   };
@@ -54,26 +53,26 @@ class EmployeeController {
     try {
       const { field, value } = req.body;
       const { id } = req.params;
-      const employeeProfileUpdate = await employeeService.updateEmployeeField(id, field, value);
+      const employeeProfileUpdate = await employeeService.updateEmployeeField(parseInt(id), field, value);
       if (employeeProfileUpdate) res.status(202).send();
-    } catch (error: Error) {
+    } catch (error: unknown) {
       next(error);
     }
   };
 
   public deleteEmployee = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { id: employeeIdToBeDeleted } = req.params;
-      const deleteStatus = await employeeService.deleteEmployeeDocument(employeeIdToBeDeleted);
+      const { id } = req.params;
+      const deleteStatus = await employeeService.deleteEmployeeDocument(parseInt(id));
       if (deleteStatus.deletedCount > 0) {
         res.status(200).send();
       } else {
         res.status(400).send('No such employee');
       }
-    } catch (error: Error) {
+    } catch (error: unknown) {
       next(error);
     }
   };
 }
 
-export const EmployeeController = new EmployeeController();
+export const EmployeeController = new EmployeeControllerClass();
