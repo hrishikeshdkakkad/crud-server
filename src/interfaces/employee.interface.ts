@@ -4,11 +4,9 @@ export interface IEmployee {
   dob: Date;
   salary: number;
   skills: string[];
-  photo: string;
+  photo: Buffer;
 }
 
-export interface Todo {
-  saveTodo(todo: ITodo): Promise<ITodo>;
-  getTodo(): Promise<ITodo[]>;
-  updateTodo(id: string, status: boolean): Promise<ITodo>;
+export interface Employee {
+  addEmployee(employee: IEmployee): Promise<IEmployee>;
 }
