@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { connect } from 'mongoose';
 import { config } from '../config/app.config';
 import { logger } from '../utils/logger';

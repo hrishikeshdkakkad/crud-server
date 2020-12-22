@@ -6,6 +6,7 @@ import hpp from 'hpp';
 import morgan from 'morgan';
 import compression from 'compression';
 import { set } from 'mongoose';
+import boolParser from 'express-query-boolean';
 
 import IndexRoute from './routes/index.route';
 import { dbConnection } from './database';
@@ -13,7 +14,7 @@ import errorMiddleware from './middlewares/error.middleware';
 import { stream } from './utils/logger';
 import { config } from './config/app.config';
 
-const app = express();
+export const app = express();
 
 const env = config.application.environment;
 
@@ -25,7 +26,7 @@ dbConnection();
 
 if (env === 'production') {
   app.use(morgan('combined', { stream }));
-} else if (this.env === 'development') {
+} else if (env === 'development') {
   app.use(morgan('dev', { stream }));
 }
 
@@ -35,6 +36,7 @@ app.use(helmet());
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(boolParser());
 app.use(cookieParser());
 
 //Routes go here

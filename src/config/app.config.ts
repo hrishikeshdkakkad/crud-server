@@ -1,12 +1,12 @@
 import 'dotenv/config';
-const { MONGO_HOST, MONGO_PORT, MONGO_DATABASE } = process.env;
+const { MONGO_HOST, MONGO_PORT, NODE_ENV, PORT } = process.env;
 
 export const config = {
   application: {
-    environment: (process.env.NODE_ENV as string) || 'development',
-    PORT: process.env.PORT,
+    environment: (NODE_ENV as string) || 'development',
+    PORT: PORT,
   },
   db: {
-    url: `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}` as string,
+    url: `mongodb://${MONGO_HOST}:${MONGO_PORT}/zet_cc_hrishikesh` as string,
   },
 };
