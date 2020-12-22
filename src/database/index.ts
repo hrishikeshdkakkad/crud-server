@@ -1,7 +1,10 @@
-import mongoose from 'mongoose';
 import { connect } from 'mongoose';
+
 import { config } from '../config/app.config';
 import { logger } from '../utils/logger';
+import { employeeSchema } from '../models/employee.model';
+
+export let connection;
 
 export const dbConnection = () => {
   const options = {
@@ -9,6 +12,7 @@ export const dbConnection = () => {
     useUnifiedTopology: true,
     useFindAndModify: false,
   };
+
   connect(config.db.url, options)
     .then(() => {
       logger.info('🟢 The database is connected.');

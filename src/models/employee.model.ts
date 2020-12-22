@@ -1,9 +1,10 @@
 import { model, Schema, Document } from 'mongoose';
+
 import { IEmployee } from '../interfaces/employee.interface';
 
-const employeeSchema: Schema<IEmployee> = new Schema({
+export const employeeSchema: Schema<IEmployee> = new Schema({
   employeeID: {
-    type: String,
+    type: Number,
     required: true,
     unique: true,
     trim: true,
@@ -15,23 +16,18 @@ const employeeSchema: Schema<IEmployee> = new Schema({
     maxlength: 128,
   },
   dob: {
-    type: Date,
+    type: String,
     required: true,
   },
   salary: {
     type: Number,
     required: true,
   },
-  skills: {
-    type: [
-      {
-        skill: {
-          type: String,
-        },
-      },
-    ],
-    required: true,
-  },
+  skills: [
+    {
+      type: String,
+    },
+  ],
   photo: {
     type: Buffer,
   },
