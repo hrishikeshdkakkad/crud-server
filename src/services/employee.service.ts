@@ -32,7 +32,7 @@ class EmployeeService implements Employee {
   }
 
   async getAllEmployees(limit: string, skip: string): Promise<IEmployee[]> {
-    const employeeList = await this.employee.find({}).limit(parseInt(limit)).skip(parseInt(skip));
+    const employeeList = await this.employee.find({}, '-photo').limit(parseInt(limit)).skip(parseInt(skip));
     return employeeList;
   }
 
