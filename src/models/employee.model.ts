@@ -1,13 +1,16 @@
-import mongoose from 'mongoose';
 import { model, Schema, Document } from 'mongoose';
 
 import { IEmployee } from '../interfaces/employee.interface';
 
-const CounterSchema = Schema({
+interface ICounter {
+  seq: number;
+}
+
+const CounterSchema = new Schema({
   _id: { type: String, required: true },
   seq: { type: Number, default: 0 },
 });
-const counter = mongoose.model('counter', CounterSchema);
+const counter = model<any, any>('counter', CounterSchema);
 
 export const employeeSchema: Schema<IEmployee> = new Schema({
   employeeID: {
@@ -41,14 +44,12 @@ export const employeeSchema: Schema<IEmployee> = new Schema({
 
 employeeSchema.pre('save', function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
-  const doc = this;
-  counter.findByIdAndUpdate({ _id: 'entitiyID' }, { $inc: { seq: 1 } }, { new: true, upsert: true }, function (error, counter): any {
+  const doc: any = this;
+  counter.findByIdAndUpdate({ _id: 'entitiyID' }, { $inc: { seq: 1 } }, { new: true, upsert: true }, function (error: any, counter: any): any {
     if (error) {
       return next(error);
     }
-    console.log(counter.seq, 'sequence');
-    doc.employeeID = counter.seq;
-    console.log(this, 'this');
+    doc.employeeID = counter.seq as number;
     next();
   });
 });

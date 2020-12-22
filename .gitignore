@@ -3,3 +3,4 @@ node_modules
 src/logs/error/*/**
 src/logs/info/*/**
 coverage/*
+build
