@@ -1,9 +1,6 @@
 import { ArrayMaxSize, ArrayUnique, IsArray, IsInt, IsString, Length } from 'class-validator';
 
 export class CreateEmployeeDto {
-  @IsInt()
-  public employeeID: number;
-
   @IsString()
   @Length(1, 128)
   public name: string;
