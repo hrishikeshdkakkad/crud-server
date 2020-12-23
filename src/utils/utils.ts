@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const isEmpty = (value: any): boolean => {
   if (value === null) {
     return true;
@@ -16,4 +18,10 @@ export const mongoFieldValueCheck = (field: string): boolean => {
   const mongoDBFields = ['name', 'dob', 'salary', 'employeeID'];
   const doesInclude = mongoDBFields.includes(field);
   return doesInclude;
+};
+
+export const isValidDateChecker = (date: string): boolean => {
+  const isValid = moment(date, 'DD/MM/YYYY', true).isValid();
+  console.log(isValid);
+  return isValid;
 };

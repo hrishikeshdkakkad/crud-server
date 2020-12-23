@@ -1,7 +1,7 @@
 {
-  "name": "backend-template",
+  "name": "crud-server",
   "version": "0.0.0",
-  "description": "TypeScript + Mongoose + MongoDB + Express API Server",
+  "description": "",
   "author": "",
   "license": "ISC",
   "scripts": {
@@ -27,6 +27,7 @@
     "helmet": "^4.2.0",
     "hpp": "^0.2.3",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
     "mongoose": "^5.10.1",
     "mongoose-auto-increment": "^5.0.1",
     "morgan": "^1.10.0",

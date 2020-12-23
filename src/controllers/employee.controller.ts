@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import HttpException from '../exceptions/HttpException';
 
 import { IEmployee, IWithBufferProperty } from '../interfaces/employee.interface';
 import { employeeService } from '../services/employee.service';
@@ -15,7 +16,7 @@ class EmployeeControllerClass {
 
   public addEmployeePhoto = async (req: IWithBufferProperty, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const employeePhotoBuffer = req.buffer.file;
+      const employeePhotoBuffer = req.file.buffer;
       const photoUpdateResult = await employeeService.employeePhoto(employeePhotoBuffer, req.body.employeeID);
       if (photoUpdateResult) {
         res.status(200).send();
@@ -70,6 +71,22 @@ class EmployeeControllerClass {
         res.status(400).send('No such employee');
       }
     } catch (error: unknown) {
+      next(error);
+    }
+  };
+
+  public getEmployeeImage = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { id } = req.params;
+      console.log(id);
+      const image = await employeeService.getEmpPhoto(parseInt(id));
+      if (!image) {
+        throw new HttpException(404, 'Image for the user does not exist');
+      }
+      res.set('Content-Type', 'image/jpg');
+      res.status(200).send(image);
+    } catch (error: unknown) {
+      console.log(error);
       next(error);
     }
   };
