@@ -20,6 +20,8 @@ class EmployeeControllerClass {
       const photoUpdateResult = await employeeService.employeePhoto(employeePhotoBuffer, req.body.employeeID);
       if (photoUpdateResult) {
         res.status(200).send();
+      } else {
+        res.status(404).send('Not Found');
       }
     } catch (error) {
       next(error);
