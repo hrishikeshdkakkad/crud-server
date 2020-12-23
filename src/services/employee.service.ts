@@ -44,7 +44,6 @@ class EmployeeService implements Employee {
 
   async getEmpPhoto(id: unknown): Promise<Buffer> {
     if (isEmpty(id)) throw new HttpException(400, 'Employee information is missing');
-    console.log('In service');
 
     const employeePhoto = await this.employee.findOne({ employeeID: id }, 'photo');
     return employeePhoto.photo;
