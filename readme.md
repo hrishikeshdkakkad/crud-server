@@ -1,6 +1,6 @@
-# Zetwerk - CRUD Project
+# Employee Management - CRUD Project
 
-The project is a MEAN stack project for Employee Management
+The project is a NodeJS stack project for Employee Management
 
 Following are the Features:
 
@@ -43,7 +43,7 @@ Following are the Features:
         - EmployeeID (to Update)
         
 - Delete Employee Profile
-    - Redquired: `id in URL params`
+    - Required: `id in URL params`
     - URL: `DELETE /api/v1/employee-management/employee/:id`
 
 - Get All Employees
